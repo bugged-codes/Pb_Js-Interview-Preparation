@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width,  initial-scale=1.0" />
+
+        <!-- Favicons -->
+        <link type="image/png" sizes="32x32" rel="icon" href="../Assets/Favicons/1.favicon-32x32.png">
+
+        <link rel="stylesheet" href="../CSS/pages.css" />
+
+        <title>JS Day-1</title>
+    </head>
+    <body>
+        <div class="header-flex">
+			<div class="home-btn">
+				<a href="../index.html"><button id="button-home">Home</button></a>
+			</div>
+			<header class="headings">
+				<h1 id="h1-heading1">JS Day-1.</h1>
+			</header>
+			<div id="total-questions">Total Number of Questions: 7</div>
+		</div>
+        <main>
+            <section id="sec1">
+                <details id="ans1" class="answers">
+                    <summary id="que1" class="questions">
+                        &nbsp;<span class="que-name-span"> Operators Comparison.</span>
+                        <br />
+                        <p class="que-main-para">What is the difference between “<b>==</b>“ and “<b>===</b>“ operators.</p>
+                    </summary>
+                    <div class="details-flex">
+                        <div class="div-flex-child1">Ans:-</div>
+                  x-icon      <pre><code>const AddTwoNumbers = (a,b) => {
+    return a+b;
+};</code></pre>
+                    </div>
+                </details>
+                <hr>
+                <details id="ans2" class="answers">
+                    <summary id="que2" class="questions">
+                        &nbsp;<span class="que-name-span">Find if the conditions are obeyed or not?</span>
+                        <p class="que-main-para">You are given two number first as <code class="code-var">a</code> and second as <code class="code-var">b</code> and check if both conditions <code class="code-var">(a&lt;10 and a&gt;b)</code> are satisfied or not with the help of operators.</p>
+                        <p class="question-note"><strong>Note:</strong> Complete the <code class="code-var">Is_Valid</code> function. No need to take any input.</p>
+                    </summary>
+                    <div class="details-flex">
+                        <div class="div-flex-child1">Ans:-</div>
+                        <pre><code>const Is_Valid = (a,b) => {
+    if(a &lt; 10 && a > b){
+        return 'true';
+    }
+    else{
+        return 'false';
+};</code></pre>
+                    </div>
+                </details>
+                <hr>
+                <details id="ans3" class="answers">
+                    <summary id="que3" class="questions">
+                        &nbsp;<span class="que-name-span">Check the conditons.</span>
+                        <p class="que-main-para">You are given two numbers <code class="code-var">a</code> and <code class="code-var">b</code> You need to do the following checks:
+                            <ol type="1">
+                                <li>If both are divisible by 10 console true.</li>
+                                <li>If both are not divisible by 10 console false.</li>
+                                <li>If one of them only is divisible by 10 console true.</li>
+                            </ol>
+                        </p>
+                        <p class="question-note"><strong>Note:</strong> Complete the <code class="code-var">Check</code> function. No need to take any input.</p>
+                    </summary>
+                    <div class="details-flex">
+                        <div class="div-flex-child1">Ans:-</div>
+                        <pre><code>const Check = (A, B) => 
+    {
+        if(A%10 == 0 && B%10 == 0){
+            return 'true';
+        }
+        else if(A%10 == 0 || B%10 == 0){
+            return 'true';
+        }
+        else{
+            return 'false';
+        }
+};</code></pre>
+                    </div>
+                </details>
+                <hr>
+                <details id="ans4" class="answers">
+                    <summary id="que4" class="questions">
+                        &nbsp;<span class="que-name-span">Find the first digit of a 4 digit number.</span>
+                        <p class="que-main-para">You are provided a four digit number <code class="code-var">n</code> only. Your task is to print out the first digit of that number.</p>
+                        <p class="question-note"><strong>Note:</strong> Complete the <code class="code-var">First_Digit</code> function. No need to take any input.</p>
+                    </summary>
+                    <div class="details-flex">
+                        <div class="div-flex-child1">Ans:-</div>
+                        <pre><code>const First_Digit = (n) => {
+    var a = n/1000;
+    var b = parseInt(a);
+    return b;
+};</code></pre>
+                    </div>
+                </details>
+                <hr>
+                <details id="ans5" class="answers">
+                    <summary id="que5" class="questions">
+                        &nbsp;<span class="que-name-span">Find the last digit of a 4 digit number.</span>
+                        <p class="que-main-para">You are provided a four digit number <code class="code-var">n</code> only. Your task is to print out the last digit of that number.</p>
+                        <p class="question-note"><strong>Note:</strong> Complete the <code class="code-var">Last_Digit</code> function. No need to take any input.</p>
+                    </summary>
+                    <div class="details-flex">
+                        <div class="div-flex-child1">Ans:-</div>
+                        <pre><code>const Last_Digit = (n) => {
+    var a = n%10;
+    return a;
+};</code></pre>
+                    </div>
+                </details>
+                <hr>
+                <details id="ans6" class="answers">
+                    <summary id="que6" class="questions">
+                        &nbsp;<span class="que-name-span">Find the remainder.</span>
+                        <p class="que-main-para">You are provided with two numbers <code class="code-var">a</code> and <code class="code-var">b</code> where <code class="code-var">a</code> as divisor and <code class="code-var">b</code> as dividend.Your task is find the remainder.</p>
+                        <p class="question-note"><strong>Note:</strong> Complete the <code class="code-var">Find_the_remainder</code> function. No need to take any input.</p>
+                    </summary>
+                    <div class="details-flex">
+                        <div class="div-flex-child1">Ans:-</div>
+                        <pre><code>const Find_the_remainder = (a,b) => {
+    return b%a;
+};</code></pre>
+                    </div>
+                </details>
+                <hr>
+                <details id="ans7" class="answers">
+                    <summary id="que7" class="questions">
+                        &nbsp;<span class="que-name-span">Multiply two Numbers.</span>
+                        <p class="que-main-para">You are provided with two numbers <code class="code-var">a</code> and <code class="code-var">b</code> Your task is to multiply these two numbers.</p>
+                        <p class="question-note"><strong>Note:</strong> Complete the <code class="code-var">Multiply_two_number</code> function. No need to take any input.</p>
+                    </summary>
+                    <div class="details-flex">
+                        <div class="div-flex-child1">Ans:-</div>
+                        <pre><code>const Multiply_two_number = (a,b) => {
+    return a*b;
+};</code></pre>
+                    </div>
+                </details>
+                <hr>
+                <details id="ans8" class="answers">
+                    <summary id="que8" class="questions">
+                        &nbsp;<span class="que-name-span">Marks Calculator.</span>
+                        <p class="que-main-para">Shyam has got his marks in three subjects as <code class="code-var">a, b</code> and <code class="code-var">c</code> (out of 100).Write a program to calculate his total marks and his average.</p>
+                        <p class="question-note"><strong>Note:</strong> Complete the <code class="code-var">Sum and Avarage</code> function. No need to take any input.</p>
+                    </summary>
+                    <div class="details-flex">
+                        <div class="div-flex-child1">Ans:-</div>
+                        <pre><code>const Sum = (A, B, C) =>{
+    return A+B+C;
+};
+
+const Average = (A, B, C) =>{
+    return (A+B+C)/3;
+};</code></pre>
+                    </div>
+                </details>
+            </section>
+        </main>
+    </body>
+</html>
