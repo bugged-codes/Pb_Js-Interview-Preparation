@@ -151,42 +151,133 @@ printFullDetails.apply(name, [30, "Mumbai"]);
 
 ---
 
+In Javascript, everything goes though execution context. When the JavaScript engine scans a script file, it makes an environment called the **Execution Context** that handles the entire transformation and execution of the code. During the context runtime, the parser parses the source code and allocates memory for the variables and functions. The source code is generated and gets executed. There are 2 phases of javascript execution context:
+1. **Creation Phasse/Memory Allocation Phase :** In this phase, the JavaScript engine creates the execution context and sets up the script's environment. It determines the values of variables and functions and sets up the scope chain for the execution context. In genreal 3 things happen in creation phase:
+   1. JS engine reates a global object that is `window` in the browser and `global` in NodeJs.
+   2. JS engine sets up a memory for storing variables and functions.
+   3. JS engine Stores the variables with values as undefined and function references.
+2. **Execution Phase :** In this phase, the JavaScript engine executes the code in the execution context. It processes any statements or expressions in the script and evaluates any function calls line by line form top to bottom of code.
 </br>
 
 ### Q.9) What are objects in javascript ?
 
 ---
-
+In JavaScript **Objects** may be defined as an unordered collection of related data, of primitive or reference types, in the form of “key: value” pairs. These keys can be variables or functions and are called properties and methods, respectively, in the context of an object.
+An object can be created with figure brackets {…} with an optional list of properties. A property is a “key: value” pair, where a key is a string (also called a “property name”), and the value can be anything.</br>
+In simple words a javaScript object is an entity having *state and behavior* (properties and method). For example: car, pen, bike, chair, glass, keyboard, monitor etc. JavaScript is an object-based language. **Everything is an object in JavaScript**. JavaScript is template based not class based. Here, we don't create class to get the object. But, we direct create objects.
 </br>
 
 ### Q.10) What are function constructors ?
 
 ---
 
+The `Function()` constructor creates a new Function object with the use of **`new`** keyword. Function objects created with the Function constructor are parsed when the function is created. This is less efficient than creating a function with a function expression or function declaration and calling it within your code, because such functions are parsed with the rest of the code. In JavaScript, when `this` keyword is used in a constructor function, `this` refers to the object when the object is created. 
+```js
+// constructor function
+function Person (name, age) {
+    this.name = name,
+    this.age = age
+    this.greet = function (){
+      return ("Hi" + " " + this.name)
+    }
+}
+
+// create an object
+const person = new Person("abc", 20);
+
+// Accessing Properties
+console.log(perosn.name);
+console.log(person.greet());
+```
 </br>
 
 ### Q.11) What are callbacks ?
 
 ---
 
+As Javascript is a *synchronous, single-threaded just in time compiled language*, and every thing in js has to go through ***Execution context*** which has only one thread to run the entire code. So, if we know that a perticular function in JS is gonna take more time to compute, then it might halt the entire thread from running. To avoid this thread-blocking we use asynchronous side of JS to get our work done while other functions are done executing. Callbacks are also needed because javascript is an event driven language. That means instead of waiting for a response javascript will keep executing while listening for other events.</br>
+In JS callbacks are nothing but a function passed inside another function as a parameter. All the functions in JS are **First-Class Functions** which allows for this to happen in JS. This callback function will run after execution of outer function, which is asynchronous side of Javascript. Some of the predefined callback functions are setTimeOut(), addEventListener() etc.
+```js
+setTimeout(function one(){
+   console.log("5 seconds are over");
+}, 5000)
+
+function two(three){
+   three();
+   console.log("Function 2 executed!");
+}
+
+two(function three(){
+  console.log("Function 3 completed");
+});
+```
 </br>
 
 ### Q.12) Explain Prototypes in JS.
 
 ---
 
+In JavaScript, every function and object has a property named **prototype** by default as it is a *prototype-based language* that facilitates the objects to acquire properties and features from one another. Here, each object contains a prototype object. In JavaScript, whenever a function is created the prototype property is added to that function automatically. This property is a *prototype object* that holds a constructor property where we can attach methods and properties in a prototype object, which enables all the other objects to inherit these methods and properties.</br>
+Whenever an object is created in JavaScript, its corresponding functions are loaded into memory. So, a new copy of the function is created on each object creation. In a prototype-based approach, all the objects share the same function. This ignores the requirement of creating a new copy of function for each object. Thus, the functions are loaded once into the memory.
 </br>
 
 ### Q.13) What is prototype chaining in JS.
 
 ---
 
+Every object in JavaScript can be linked to a prototype object which is the mechanism through which inheritance is provided.Ther exists a property `--proto__` that allows us to see the prototype an object is pointing to. When a property or method is called on an object JS engine will check it inside object for it's defination, if the object doesn’t contain it, the JS engine will then look to the object’s prototype to resolve the property or method. If an object doesn’t contain a property or method, the JavaScript engine will continue up the prototype chain to try and resolve it. In JavaScript, all functions have a Prototype property and all objects have a `__proto__` property that points to the prototype of their constructor function. The prototype on object instance is available through `Object.getPrototypeOf(object)` or *`__proto__`* property whereas prototype on constructors function is available through `Object.prototype`. </br>
+**Prototype Chaining** is used to build new types of objects based on existing ones. It is similar to inheritance in a class based language. Prototype object has a prototype of its own, and so on until an object is reached with null as its prototype. By definition, null has no prototype, and acts as the final link in this prototype chain.
+```js
+function Car(color, hp){
+   this.color = color;
+   this.hp = hp;
+}
+Car.prototype.works = () => true;
+
+let car1 = new Car("White", 10);
+
+Car.prototype.doors = 4
+
+let car2 = new Car("Blue", 25,);
+car2.doors = 2;
+
+let getproto = Object.getPrototypeOf(car1);
+
+console.log(getproto); // Car { works: [Function], doors: 4 }
+console.log(car1); // Car { color: 'White', hp: 10 }
+console.log(car2); // Car { color: 'Blue', hp: 25, doors: 2 }
+```
 </br>
 
-### Q.14) Give an example of inheritance using function constructor.
+### Q.14) Give an example of inheritance using function constructor in JS.
 
 ---
 
+Inheriting a previously defined *constructor function* means using the *parameters* of the previously defined function along with adding some new parameters to the newly defined constructor function. For this, we need to use the `call()` function which allows us to call a function defined somewhere else in the current context. </br>
+In below given example we can observe that the constructor function of Employee is inherited to create a new constructor function Developer which can be used to create objects with new properties along with the inherited properties of the parent constructor.
+```js
+function Employee(name, age, gender, id) {
+   this.name = name;
+   this.age = age;
+   this.gender = gender;
+   this.id = id;
+};
+
+function Developer(name, age, gender, id, specialization) {
+  
+   // Calling Employee constructor function
+   Employee.call(this, name, age, gender, id);
+  
+   // Adding a new parameter
+   this.specialization = specialization;
+};
+  
+// Creating objects
+let Employee1 = new Employee("Suraj", 28, "Male", 564);
+let Developer1 = new Developer("Karishma", 31, "Female", 345, "Frontend Developer");
+console.log(Employee1); // Employee {name: 'Suraj', age: 28, gender: 'Male', id: 564}
+console.log(Developer1); // Developer {name: 'Karishma', age: 31, gender: 'Female', id: 345, 
+```
 </br>
 
 ## Day 3️⃣
@@ -196,36 +287,151 @@ printFullDetails.apply(name, [30, "Mumbai"]);
 
 ---
 
+An *expression* is a valid unit of code that resolves to a value. There are two types of expressions: those that have side effects (such as assigning values) and those that purely *evaluate*. e.g.
+>X = 7 is an example of first type. This expression uses the `=` *operator* to assign the *value* seven to the *variable* `x`. The expression itself evaluates to 7.
+
+>3 + 4 is an example of second type. This expression uses the `+` *operator* to add 3 and 4 together and produces a *value*, 7.
+
+JS supports multiple types of variables, which are as follows:
+1. **Arithmetic Operators :** An arithmetic operator takes numerical values (either literals or variables) as their operands and returns a single numerical value. In addition to standard arithmetic operators JS also provides certain additional operators.
+> `+` (Addition),  `-` (Subtraction),  `*` (Multiplication),  `/` (Division),  `%` (Remainder),  `++` (Increment),  `--` (Decrement),  `**` (Exponential Operator)
+
+</br>
+
+2. **Assignment Operator :** An assignment operator assigns a value to its left operand based on the value of its right operand.
+> `=` Equal to assignment operator.
+
+</br>
+
+3. **Comparison Operator :** A comparison operator compares its operands and returns a logical value based on whether the comparison is true. The operands can be numerical, string, logical, or object values.
+> `==` (Loose equality),  `===` (Strict equality),  `!=` (Not equal),  `!==` (Strictly Not equal),  `<` (Less than), `<=` (Less than or Equal to),  `>` (Greater than),  `>=` (Greater than or Equal to)
+
+</br>
+
+4. **Bitwise Operator :** A bitwise operator treats their operands as a set of 32 bits (zeros and ones), rather than as decimal, hexadecimal, or octal numbers. For example, the decimal number nine has a binary representation of 1001. Bitwise operators perform their operations on such binary representations, but they return standard JavaScript numerical values.
+> `&` (Bitwise AND),  `|` (Bitwise OR),  `^` (Bitwise XOR),  `~` (Bitwise NOT)
+
+</br>
+
+5. **Logical Operator :** Logical operators are typically used with *Boolean* (logical) values as they return a *Boolean* value.
+> `&&` (Logical AND),  `||` (Logical OR),  `!` (Logical NOT)
+
+</br>
+
+6. **Conditional (ternary) Operator :** The conditional operator is the only JavaScript operator that takes three operands. The operator can have one of two values based on a condition. The syntax is: `condition ? value1 : value2`
+
+</br>
+
+7. **Special Operators :** These operators are additonal operators that JS provides.
+> `delete` (Delete Operator which deletes property of an Object),  `typeof` (Typeof Operator which returns the type of an operand),  `void` (Void Operator specifies an expression to be evaluated without returning a value.),  `in` (In operator it returns true if the specified property is in the specified object.),  `this` (We use the this keyword to refer to the current object. In general, this refers to the calling object in a method. Must use this either with the dot or the bracket)
+
+</br>
+
+8. **`()` Grouping Operator :** The grouping operator `( )` controls the precedence of evaluation in expressions.
+
 </br>
 
 ### Q.16) What are arrow functions ?
 
 ---
 
+The **Arrow Functions** were introduced in *ES6* version of *ECMA Script* in 2015 provides a concise way to write functions in JavaScript. It is nothing but, a shorter syntax for a anonymous function expression and does not have its own this, arguments, super, or new.target. These functions are best suited for non-method functions, and they cannot be used as constructors. Another significant advantage it offers is the fact that it does not bind its own this. In other words, the context inside arrow functions is lexically or statically defined.
+</br>
+Limitations on arrow functions are as follows:
+ - Arrow functions don't have their own bindings to `this`, `arguments`, or `super`, and should not be used as `methods`.
+ - Arrow functions cannot be used as `constructors`. Calling them with `new` throws a TypeError. They also don't have access to the `new.target` keyword.
+ - Arrow functions cannot use `yield` within their body and cannot be created as generator functions.
+ - The parentheses can only be omitted if the function has a single simple parameter. If it has multiple parameters, no parameters, or default, destructured, or rest parameters, the parentheses around the parameter list are required.
+ - The braces can only be omitted if the function directly returns an expression. If the body has additional lines of processing, the braces are required — and so is the `return` keyword. Arrow functions cannot guess what or when you want to return.
+ - Due to being anonymous arrow functions are always unnamed. If the arrow function needs to call itself, use a named function expression instead. You can also assign the arrow function to a variable so it has a name.
+ - Returning object literals using the concise body syntax `(params) => { object: literal }` does not work as expected. To fix this, wrap the object literal in parentheses `const func = () => ({ foo: 1 });`
+ - the `call()`, `apply()`, and `bind()` methods are not useful when called on arrow functions, because arrow functions establish this based on the scope the arrow function is defined within, and the `this` value does not change based on how the function is invoked.
+ - Arrow functions do not have their own arguments object.
+```js
+   // Traditional Anonymous function.
+   (function (a) {
+      return a + 100;
+   });
+
+   a => a + 100; // Shorter Arrow Function with same functionality.
+```
 </br>
 
 ### Q.17) What is the difference between `undefined` vs `not defined` vs `NaN` in JS.
 
 ---
 
+**`Undefined` :**
+1. It is also *not an assignment value*, like where a variable has been declared but has not yet been assigned a value.
+2. The undefined value is a primitive value used when a variable has not been assigned a value.
+3. Indicates absence of variable itself.
+4. Converted to NaN while performing primitive operations.
+5. Type of undefined is undefined.
+
+**`NaN` :**
+1. NaN stands for *(Not-A-Number)*
+2. It represents something which is not a number.
+3. NaN is not equal to itself.
+4. The isNaN() function is used to determine whether a value is an illegal number (Not-a-Number) or not. i.e, This function returns true if the value equates to NaN.
+5. Not a Number, is a member of a numeric data type that can be interpreted as a value that is undefined.
+```js
+   isNaN("Hello");   //true
+   isNaN("100");     //false
+```
+
+**`null` :**
+1. It is an assignment value which indicates that variable points to no object. 
+2. Type of null is object.
+3. The null value is a primitive value that represents the null, empty, or non-existent reference.
+4. Indicates the absence of a value for a variable.
+5. Converted to zero (0) while performing primitive operations.
 </br>
 
 ### Q.18) What is callback hell ?
 
 ---
 
+**Callback:** A callback is a function that is passed as an argument to another function that executes the callback based on the result. They are basically functions that are executed only after a result is produced. Callbacks are an important part of asynchronous JavaScript.
+</br>
+**Callback Hell:** Callback Hell is essentially nested callbacks stacked below one another forming a pyramid structure. Every callback depends/waits for the previous callback, thereby making a pyramid structure that affects the readability and maintainability of the code.
+```js
+async1(function(){
+        async2(function(){
+            async3(function(){
+                async4(function(){
+                    ....
+                });
+            });
+        });
+    }); 
+```
 </br>
 
 ### Q.19) Please explain Self Invoking Function and write it's code.
 
 ---
 
+JavaScript *Self invoking functions* are nameless self-executing functions and invoked immediately after defining it. These self-invoking functions are man-made, these functions will execute automatically when followed by `( )`. Without `( )`, a function cannot be self-invoked. This is useful in initialization, adding event listeners, etc. These functions are also called as Immediately Invoked Function Expressions, as IIFE or Self Executing functions. The purpose of wrapping these functions is to control the visibility of its members. These anonymous functions are arguments passed to higher-order functions that needs to return a function. If the function is used only once, using a self Invoking function is easier as it is light weighted syntactically compared to the named function.
+```js
+   (function() {
+   // body of the function
+   console.log("Hi.)
+   })();
+```
 </br>
 
 ### Q.20) What is the use of `setTimeout` ?
 
 ---
 
+The `setTimeout()` method is used to call a function or evaluate an expression after a specified number of milliseconds only once. We use this to delay some kinds of executions. It is also used for animations and DOM manipulations in jquery.
+</br>
+For example, let's log a message after 2 seconds using setTimeout method,
+```js
+   setTimeout(function () {
+      console.log("Good morning");
+   }, 2000);
+```
 </br>
 
 ## Day 4️⃣
